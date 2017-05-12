@@ -1,7 +1,10 @@
-package pe.edu.upc.dribblers;
+package pe.edu.upc.dribblers.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import com.facebook.FacebookSdk;
+
+import pe.edu.upc.dribblers.R;
 
 public class MainActivity extends AppCompatActivity {
 
