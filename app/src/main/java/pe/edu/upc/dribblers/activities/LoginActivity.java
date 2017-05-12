@@ -38,6 +38,7 @@ public class LoginActivity extends BaseActivity {
         initializeComponents();
     }
     private void initializeComponents(){
+        removerSavedEmail();
         callbackManager = CallbackManager.Factory.create();
         initializeGoogleAuth();
         initializeFacebookAuth();

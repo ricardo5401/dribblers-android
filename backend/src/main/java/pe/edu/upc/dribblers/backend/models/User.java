@@ -2,72 +2,69 @@ package pe.edu.upc.dribblers.backend.models;
 
 import android.util.Log;
 
+import com.orm.SugarRecord;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by ricardo on 5/11/17.
  */
 
-public class User implements Serializable {
-    private int mId;
-    private String mFirstName;
-    private String mLastName;
-    private String mToken;
-    private String mEmail;
+public class User extends SugarRecord implements Serializable {
+    int foreId;
+    String firstName;
+    String lastName;
+    String token;
+    String email;
 
-    public User(){
-        mId = 0;
-        mFirstName = "";
-        mLastName = "";
-        mEmail = "";
-        mToken = "";
+    public User(){ }
+
+    public int getForeId() {
+        return foreId;
     }
 
-    public int getId() {
-        return mId;
-    }
-
-    public User setId(int mId) {
-        this.mId = mId;
+    public User setForeId(int foreId) {
+        this.foreId = foreId;
         return this;
     }
 
     public String getFirstName() {
-        return mFirstName != null ? mFirstName : "";
+        return firstName != null ? firstName : "";
     }
 
     public User setFirstName(String mFirstName) {
-        this.mFirstName = mFirstName;
+        this.firstName = mFirstName;
         return this;
     }
 
     public String getLastName() {
-        return mLastName != null ? mLastName : "";
+        return lastName != null ? lastName : "";
     }
 
     public User setLastName(String mLastName) {
-        this.mLastName = mLastName;
+        this.lastName = mLastName;
         return this;
     }
 
     public String getToken() {
-        return mToken != null ? mToken : "";
+        return token != null ? token : "";
     }
 
     public User setToken(String mToken) {
-        this.mToken = mToken;
+        this.token = mToken;
         return this;
     }
 
     public String getEmail() {
-        return mEmail != null ? mEmail : "";
+        return email != null ? email : "";
     }
 
     public User setEmail(String mEmail) {
-        this.mEmail = mEmail;
+        this.email = mEmail;
         return this;
     }
 
@@ -78,12 +75,17 @@ public class User implements Serializable {
                     .setEmail(mJSONObject.getString("email"))
                     .setFirstName(mJSONObject.getString("first_name"))
                     .setLastName(mJSONObject.getString("last_name"))
-                    .setId(mJSONObject.getInt("id"))
+                    .setForeId(mJSONObject.getInt("id"))
                     .setToken(mJSONObject.getString("token"));
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e("BUILD_USER", e.getMessage());
         }
         return user;
+    }
+
+    public static User findByEmail(String email){
+        List<User> users = User.find(User.class, "email = ?", email);
+        return (users.size() > 0) ? users.get(0) : null;
     }
 }

@@ -2,25 +2,23 @@ package pe.edu.upc.dribblers.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import pe.edu.upc.dribblers.R;
+import pe.edu.upc.dribblers.backend.models.User;
 
-public class LoaderActivity extends AppCompatActivity {
+public class LoaderActivity extends BaseActivity {
 
     static final int SPLASH_SCREEN_DELAY = 2000;
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loader);
-        context = this;
-        //loadUser();
         simulateLoader();
     }
 
@@ -28,10 +26,13 @@ public class LoaderActivity extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                // Start the next activity
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                //loading email from storage
+                String email = loadEmail();
+                if(email == null){
+                    goToLogin();
+                }else{
+                    goToNextActivity(email);
+                }
             }
         };
         // Simulate a long loading process on application startup.
@@ -39,17 +40,12 @@ public class LoaderActivity extends AppCompatActivity {
         timer.schedule(task, SPLASH_SCREEN_DELAY);
     }
 
-    private void loadUser(){
-        //here put logic to load user from sugar
-        goToLogin();
-    }
-
-    private void goToLogin(){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-    private void goToMain(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    private void goToNextActivity(String email){
+        User user = User.findByEmail(email);
+        if(user != null){
+            goToMain(user);
+        }else{
+            goToLogin();
+        }
     }
 }

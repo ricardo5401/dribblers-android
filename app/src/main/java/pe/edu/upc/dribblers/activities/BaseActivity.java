@@ -3,6 +3,7 @@ package pe.edu.upc.dribblers.activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.facebook.login.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,10 +40,10 @@ public class BaseActivity extends AppCompatActivity {
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
-        crearHandlers(this);
+        createHandlers(this);
     }
 
-    protected void crearHandlers(final Context context){
+    protected void createHandlers(final Context context){
         toastMessage = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message message) {
@@ -83,6 +85,7 @@ public class BaseActivity extends AppCompatActivity {
                     if(authenticatedUser != null && !authenticatedUser.getEmail().isEmpty()){
                         Log.i(SIGNIN_TAG, "Sign in successfully");
                         logUser(authenticatedUser);
+                        saveUser(authenticatedUser);
                         if(redirect){ goToMain(authenticatedUser); }
                     }else{
                         Log.e(SIGNIN_TAG, "Error on signin");
@@ -97,6 +100,16 @@ public class BaseActivity extends AppCompatActivity {
             });
     }
 
+    public void goToMain(User user){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("user", user);
+        startActivity(intent);
+    }
+
+    public void goToLogin(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+    }
 
     private JSONObject extractUser(JSONObject jsonObject){
         try {
@@ -107,27 +120,52 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private void goToMain(User user){
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("user", user);
-        startActivity(intent);
-    }
-
     private void manageNetworkError(ANError error, String TAG){
         Log.e(TAG, "Error code: " + String.valueOf(error.getErrorCode()));
         Log.e(TAG, "Error detail: " + error.getErrorDetail());
     }
 
-    private void showError(String message){
+    public void showError(String message){
         showMessage(message);
         hideDialogLoading();
     }
 
     public void logUser(User user){
-        Log.i(LOG_USER, "Id: " + String.valueOf(user.getId()));
+        Log.i(LOG_USER, "Id: " + String.valueOf(user.getForeId()));
         Log.i(LOG_USER, "FirstName: " + user.getFirstName());
         Log.i(LOG_USER, "LastName: " + user.getLastName());
         Log.i(LOG_USER, "Email: " + user.getEmail());
         Log.i(LOG_USER, "Token: " + user.getToken());
+    }
+
+    public void logout(){
+        LoginManager.getInstance().logOut();
+        removerSavedEmail();
+        goToLogin();
+    }
+
+    public void saveUser(User user){
+        User fromStorage = User.findByEmail(user.getEmail());
+        if( fromStorage == null){
+            user.save();
+        }
+        storeEmail(user.getEmail());
+    }
+
+    public void storeEmail(String email){
+        SharedPreferences.Editor sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE).edit();
+        sharedPreferences.putString("email", email);
+        sharedPreferences.commit();
+        Log.i("STORAGE_USER", "Saved!");
+    }
+
+    public String loadEmail(){
+        Log.i("STORAGE_USER", "loaded!");
+        return getSharedPreferences("prefs", MODE_PRIVATE).getString("email", null);
+    }
+
+    public void removerSavedEmail(){
+        getSharedPreferences("prefs", MODE_PRIVATE).edit().remove("email").apply();
+        Log.i("STORAGE_USER", "Removed!");
     }
 }
