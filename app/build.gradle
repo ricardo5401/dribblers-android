@@ -32,6 +32,7 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-auth:9.8.0'
     compile 'com.amitshekhar.android:android-networking:1.0.0'
+    compile 'com.github.satyan:sugar:1.5'
     testCompile 'junit:junit:4.12'
     compile project(path: ':backend')
 }

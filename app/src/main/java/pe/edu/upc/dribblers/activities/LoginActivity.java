@@ -15,7 +15,7 @@ import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.User;
 import pe.edu.upc.dribblers.backend.network.Google;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     CallbackManager callbackManager;
     GoogleApiClient mGoogleApiClient;
@@ -51,8 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             User user = Google.SignInResult(result);
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            signIn(user, true);
         }
     }
 }

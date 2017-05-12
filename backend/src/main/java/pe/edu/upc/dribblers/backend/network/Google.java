@@ -20,8 +20,6 @@ public class Google {
     private static GoogleSignInOptions getOptions(){
         return new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(Constants.Google.CLIENT_ID)
-                .requestServerAuthCode(Constants.Google.CLIENT_ID, true)
                 .requestEmail().build();
     }
 
@@ -44,13 +42,12 @@ public class Google {
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acc = result.getSignInAccount();
-
             LogResult(acc);
+
             return new User()
                     .setEmail(acc.getEmail())
                     .setFirstName(acc.getGivenName())
-                    .setLastName(acc.getFamilyName())
-                    .setToken(acc.getIdToken());
+                    .setLastName(acc.getFamilyName());
         } else {
             return null;
         }
@@ -58,11 +55,9 @@ public class Google {
 
     private static void LogResult(GoogleSignInAccount acc){
         String TAG = "GOOGLE_AUTH";
-        Log.e(TAG, "email= "+ acc.getEmail());
-        Log.e(TAG, "family name = "+ acc.getFamilyName());
-        Log.e(TAG, "display name = "+ acc.getDisplayName());
-        Log.e(TAG, "given name= "+ acc.getGivenName());
-        Log.e(TAG, "token = "+ acc.getIdToken());
-        Log.e(TAG, "server code = "+ acc.getServerAuthCode());
+        Log.e(TAG, "Email= "+ acc.getEmail());
+        Log.e(TAG, "Last name = "+ acc.getFamilyName());
+        Log.e(TAG, "First name= "+ acc.getGivenName());
+        Log.e(TAG, "Full name = "+ acc.getDisplayName());
     }
 }
