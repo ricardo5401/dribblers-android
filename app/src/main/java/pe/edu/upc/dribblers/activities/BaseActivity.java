@@ -16,6 +16,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import pe.edu.upc.dribblers.backend.models.User;
@@ -78,7 +79,7 @@ public class BaseActivity extends AppCompatActivity {
             .getAsJSONObject(new JSONObjectRequestListener() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    User authenticatedUser = User.build(response);
+                    User authenticatedUser = User.build( extractUser(response) );
                     if(authenticatedUser != null && !authenticatedUser.getEmail().isEmpty()){
                         Log.i(SIGNIN_TAG, "Sign in successfully");
                         logUser(authenticatedUser);
@@ -94,6 +95,16 @@ public class BaseActivity extends AppCompatActivity {
                     showError("Server error, try again");
                 }
             });
+    }
+
+
+    private JSONObject extractUser(JSONObject jsonObject){
+        try {
+            return jsonObject.getJSONObject("user");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return jsonObject;
+        }
     }
 
     private void goToMain(User user){

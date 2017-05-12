@@ -74,13 +74,12 @@ public class User implements Serializable {
     public static User build(JSONObject mJSONObject){
         User user = null;
         try {
-            JSONObject userOBJ = mJSONObject.getJSONObject("user");
             user = new User()
-                    .setEmail(userOBJ.getString("email"))
-                    .setFirstName(userOBJ.getString("first_name"))
-                    .setLastName(userOBJ.getString("last_name"))
-                    .setId(userOBJ.getInt("id"))
-                    .setToken(userOBJ.getString("token"));
+                    .setEmail(mJSONObject.getString("email"))
+                    .setFirstName(mJSONObject.getString("first_name"))
+                    .setLastName(mJSONObject.getString("last_name"))
+                    .setId(mJSONObject.getInt("id"))
+                    .setToken(mJSONObject.getString("token"));
         } catch (JSONException e) {
             e.printStackTrace();
             Log.e("BUILD_USER", e.getMessage());
