@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Dribblers</string>
     <string name="facebook_app_id">219611005196127</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

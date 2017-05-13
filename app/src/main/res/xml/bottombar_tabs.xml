@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <tab
+        id="@+id/homeMenu"
+        icon="@drawable/ic_home"
+        title="Home" />
+    <tab
+        id="@+id/trainingMenu"
+        icon="@drawable/ic_exercise"
+        title="Training" />
+    <tab
+        id="@+id/notificationMenu"
+        icon="@drawable/ic_notification"
+        title="Notification" />
+</tabs>
