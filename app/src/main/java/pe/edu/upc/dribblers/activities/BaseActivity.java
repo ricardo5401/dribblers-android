@@ -103,11 +103,13 @@ public class BaseActivity extends AppCompatActivity {
     public void goToMain(User user){
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("user", user);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     public void goToLogin(){
         Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
