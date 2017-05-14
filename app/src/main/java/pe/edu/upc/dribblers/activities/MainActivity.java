@@ -20,6 +20,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.User;
+import pe.edu.upc.dribblers.fragments.EstatisticFragment;
 import pe.edu.upc.dribblers.fragments.HomeFragment;
 import pe.edu.upc.dribblers.fragments.NotificationFragment;
 import pe.edu.upc.dribblers.fragments.TrainingFragment;
@@ -30,7 +31,7 @@ public class MainActivity extends BaseActivity {
     BottomBar bottomBar;
     Fragment fragment;
     FragmentManager fragmentManager;
-
+    String title = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,16 +56,23 @@ public class MainActivity extends BaseActivity {
                 switch (tabId) {
                     case R.id.homeMenu:
                         fragment = new HomeFragment();
+                        title = "Inicio";
                         break;
                     case R.id.trainingMenu:
                         fragment = new TrainingFragment();
+                        title = "Entrenamiento";
                         break;
                     case R.id.notificationMenu:
                         fragment = new NotificationFragment();
+                        title = "Notificaciones";
                         break;
+                    case R.id.estatiticMenu:
+                        fragment = new EstatisticFragment();
+                        title = "Estadisticas";
                 }
                 final FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.contentContainer, fragment).commit();
+                getSupportActionBar().setTitle(title);
             }
         });
     }
@@ -92,4 +100,7 @@ public class MainActivity extends BaseActivity {
     public User getUser(){
         return user;
     }
+
+
+
 }

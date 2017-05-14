@@ -4,13 +4,17 @@
     <tab
         id="@+id/homeMenu"
         icon="@drawable/ic_home"
-        title="Home" />
+        title="Inicio" />
     <tab
         id="@+id/trainingMenu"
         icon="@drawable/ic_exercise"
-        title="Training" />
+        title="Entrenamiento" />
     <tab
         id="@+id/notificationMenu"
         icon="@drawable/ic_notification"
-        title="Notification" />
+        title="Notificaciones" />
+    <tab
+        id="@+id/estatiticMenu"
+        icon="@drawable/ic_action_name"
+        title="Estadisticas" />
 </tabs>
