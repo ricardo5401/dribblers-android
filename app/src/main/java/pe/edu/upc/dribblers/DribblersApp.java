@@ -10,12 +10,12 @@ import com.orm.SugarApp;
 public class DribblersApp extends SugarApp {
     private static DribblersApp mDribblersApp;
 
-    public DribblersApp(){
+    public DribblersApp() {
         super();
         mDribblersApp = this;
     }
 
-    public static DribblersApp getInstance(){
+    public static DribblersApp getInstance() {
         return mDribblersApp;
     }
 

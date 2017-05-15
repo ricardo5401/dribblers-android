@@ -29,10 +29,11 @@ import pe.edu.upc.dribblers.backend.network.Constants;
  */
 
 public class BaseActivity extends AppCompatActivity {
-    Handler toastMessage;
-    private ProgressDialog dialog;
+
     private static final String SIGNIN_TAG = "SIGNIN_USER";
     private static final String LOG_USER = "LOG_USER";
+    Handler toastMessage;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class BaseActivity extends AppCompatActivity {
         createHandlers(this);
     }
 
-    protected void createHandlers(final Context context){
+    protected void createHandlers(final Context context) {
         toastMessage = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message message) {
@@ -52,68 +53,71 @@ public class BaseActivity extends AppCompatActivity {
         };
     }
 
-    protected void showMessage(String mensaje){
+    protected void showMessage(String mensaje) {
         toastMessage.obtainMessage(1, mensaje).sendToTarget();
     }
 
-    protected void showDialogLoading(String mensaje){
+    protected void showDialogLoading(String mensaje) {
         this.dialog.setMessage(mensaje);
         this.dialog.show();
     }
 
-    protected void hideDialogLoading(){
+    protected void hideDialogLoading() {
         if (dialog.isShowing()) {
             dialog.dismiss();
         }
     }
 
-    protected void signIn(final User user, final boolean redirect){
+    protected void signIn(final User user, final boolean redirect) {
         //new sign in via social network
         showDialogLoading("Sign In...");
         Log.i(SIGNIN_TAG, "URL: " + Constants.Server.AUTHORIZE_URL);
         AndroidNetworking.post(Constants.Server.AUTHORIZE_URL)
-            .addBodyParameter("email", user.getEmail())
-            .addBodyParameter("first_name", user.getFirstName())
-            .addBodyParameter("last_name", user.getLastName())
-            .setTag(SIGNIN_TAG)
-            .setPriority(Priority.MEDIUM)
-            .build()
-            .getAsJSONObject(new JSONObjectRequestListener() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    User authenticatedUser = User.build( extractUser(response) );
-                    if(authenticatedUser != null && !authenticatedUser.getEmail().isEmpty()){
-                        Log.i(SIGNIN_TAG, "Sign in successfully");
-                        logUser(authenticatedUser);
-                        saveUser(authenticatedUser);
-                        if(redirect){ goToMain(authenticatedUser); }
-                    }else{
-                        Log.e(SIGNIN_TAG, "Error on signin");
+                .addBodyParameter("email", user.getEmail())
+                .addBodyParameter("first_name", user.getFirstName())
+                .addBodyParameter("last_name", user.getLastName())
+                .setTag(SIGNIN_TAG)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        User authenticatedUser = User.build(extractUser(response));
+                        if (authenticatedUser != null && !authenticatedUser.getEmail().isEmpty()) {
+                            Log.i(SIGNIN_TAG, "Sign in successfully");
+                            logUser(authenticatedUser);
+                            saveUser(authenticatedUser);
+                            if (redirect) {
+                                goToMain(authenticatedUser);
+                            }
+                        } else {
+                            Log.e(SIGNIN_TAG, "Error on signin");
+                            showError("Server error, try again");
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        manageNetworkError(error, SIGNIN_TAG);
                         showError("Server error, try again");
                     }
-                }
-                @Override
-                public void onError(ANError error) {
-                    manageNetworkError(error, SIGNIN_TAG);
-                    showError("Server error, try again");
-                }
-            });
+                });
     }
 
-    public void goToMain(User user){
+    public void goToMain(User user) {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("user", user);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
-    public void goToLogin(){
+    public void goToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
-    private JSONObject extractUser(JSONObject jsonObject){
+    private JSONObject extractUser(JSONObject jsonObject) {
         try {
             return jsonObject.getJSONObject("user");
         } catch (JSONException e) {
@@ -122,17 +126,17 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    private void manageNetworkError(ANError error, String TAG){
+    private void manageNetworkError(ANError error, String TAG) {
         Log.e(TAG, "Error code: " + String.valueOf(error.getErrorCode()));
         Log.e(TAG, "Error detail: " + error.getErrorDetail());
     }
 
-    public void showError(String message){
+    public void showError(String message) {
         showMessage(message);
         hideDialogLoading();
     }
 
-    public void logUser(User user){
+    public void logUser(User user) {
         Log.i(LOG_USER, "Id: " + String.valueOf(user.getForeId()));
         Log.i(LOG_USER, "FirstName: " + user.getFirstName());
         Log.i(LOG_USER, "LastName: " + user.getLastName());
@@ -140,33 +144,33 @@ public class BaseActivity extends AppCompatActivity {
         Log.i(LOG_USER, "Token: " + user.getToken());
     }
 
-    public void logout(){
+    public void logout() {
         LoginManager.getInstance().logOut();
         removerSavedEmail();
         goToLogin();
     }
 
-    public void saveUser(User user){
+    public void saveUser(User user) {
         User fromStorage = User.findByEmail(user.getEmail());
-        if( fromStorage == null){
+        if (fromStorage == null) {
             user.save();
         }
         storeEmail(user.getEmail());
     }
 
-    public void storeEmail(String email){
+    public void storeEmail(String email) {
         SharedPreferences.Editor sharedPreferences = getSharedPreferences("prefs", MODE_PRIVATE).edit();
         sharedPreferences.putString("email", email);
         sharedPreferences.commit();
         Log.i("STORAGE_USER", "Saved!");
     }
 
-    public String loadEmail(){
+    public String loadEmail() {
         Log.i("STORAGE_USER", "loaded!");
         return getSharedPreferences("prefs", MODE_PRIVATE).getString("email", null);
     }
 
-    public void removerSavedEmail(){
+    public void removerSavedEmail() {
         getSharedPreferences("prefs", MODE_PRIVATE).edit().remove("email").apply();
         Log.i("STORAGE_USER", "Removed!");
     }

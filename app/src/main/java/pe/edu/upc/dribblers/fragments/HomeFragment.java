@@ -6,11 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import pe.edu.upc.dribblers.R;
-import pe.edu.upc.dribblers.activities.MainActivity;
-import pe.edu.upc.dribblers.backend.models.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +27,7 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    private void initializeComponents(){
+    private void initializeComponents() {
     }
 
 }

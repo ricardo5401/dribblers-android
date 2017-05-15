@@ -26,10 +26,10 @@ import pe.edu.upc.dribblers.backend.network.Google;
 
 public class LoginActivity extends BaseActivity {
 
+    private static final int RC_SIGN_IN = 20;
     CallbackManager callbackManager;
     GoogleApiClient mGoogleApiClient;
     LoginButton facebookBTN;
-    private static final int RC_SIGN_IN = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +37,15 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         initializeComponents();
     }
-    private void initializeComponents(){
+
+    private void initializeComponents() {
         removerSavedEmail();
         callbackManager = CallbackManager.Factory.create();
         initializeGoogleAuth();
         initializeFacebookAuth();
     }
-    private void initializeGoogleAuth(){
+
+    private void initializeGoogleAuth() {
         mGoogleApiClient = Google.getClient(this);
         findViewById(R.id.googleBTN).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +56,7 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    private void initializeFacebookAuth(){
+    private void initializeFacebookAuth() {
         FacebookSdk.sdkInitialize(getApplicationContext());
         facebookBTN = (LoginButton) findViewById(R.id.facebookBTN);
         facebookBTN.setReadPermissions(Facebook.ReadPermission());
@@ -64,17 +66,18 @@ public class LoginActivity extends BaseActivity {
 
                 try {
                     GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                Log.v("FACEBOOK_AUTH", response.toString());
-                                handleSignInResult( Facebook.SignInResult(object) );
-                            }
-                        });;
+                            loginResult.getAccessToken(),
+                            new GraphRequest.GraphJSONObjectCallback() {
+                                @Override
+                                public void onCompleted(JSONObject object, GraphResponse response) {
+                                    Log.v("FACEBOOK_AUTH", response.toString());
+                                    handleSignInResult(Facebook.SignInResult(object));
+                                }
+                            });
+                    ;
                     request.setParameters(Facebook.Parameters());
                     request.executeAsync();
-                }catch(Exception ex){
+                } catch (Exception ex) {
                     showMessage(ex.getMessage());
                     handleSignInResult(null);
                 }
@@ -82,7 +85,7 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             public void onCancel() {
-                Log.e("FACEBOOK_AUTH","cancelado");
+                Log.e("FACEBOOK_AUTH", "cancelado");
                 showMessage("Login cancelado");
             }
 
@@ -106,16 +109,16 @@ public class LoginActivity extends BaseActivity {
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult( Google.SignInResult(result) );
-        }else{ //facebook callback
+            handleSignInResult(Google.SignInResult(result));
+        } else { //facebook callback
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
-    protected void handleSignInResult(User user){
-        if(user != null && !user.getEmail().isEmpty()){
+    protected void handleSignInResult(User user) {
+        if (user != null && !user.getEmail().isEmpty()) {
             signIn(user, true);
-        }else{
+        } else {
             showMessage("Unknown error, please try again");
         }
     }

@@ -23,21 +23,20 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 import pe.edu.upc.dribblers.R;
-import pe.edu.upc.dribblers.activities.MainActivity;
 
 /**
  * Created by Richard on 14/05/2017.
  */
 
-public class EstatisticFragment extends Fragment {
+public class StatisticsFragment extends Fragment {
 
 
     PieChart mPieChart;
     BarChart mBarChart;
-    private float[] yData = { 70, 30};
-    private String[] xData = { "Acertados" ,"Fallidos"};
+    private float[] yData = {70, 30};
+    private String[] xData = {"Acertados", "Fallidos"};
 
-    public EstatisticFragment (){
+    public StatisticsFragment() {
 
     }
 
@@ -50,12 +49,13 @@ public class EstatisticFragment extends Fragment {
 
 
         mPieChart = (PieChart) v.findViewById(R.id.pieChart);
-       configurePie();
+        configurePie();
 
 
         return v;
     }
-    private void configurePie(){
+
+    private void configurePie() {
         mPieChart.setRotationEnabled(true);
 
         // configure pie chart
@@ -96,6 +96,7 @@ public class EstatisticFragment extends Fragment {
         l.setXEntrySpace(7);
         l.setYEntrySpace(5);
     }
+
     private void addPieData() {
         ArrayList<PieEntry> yVals1 = new ArrayList<PieEntry>();
 
@@ -120,7 +121,6 @@ public class EstatisticFragment extends Fragment {
 
         for (int c : ColorTemplate.JOYFUL_COLORS)
             colors.add(c);
-
 
 
         colors.add(ColorTemplate.getHoloBlue());

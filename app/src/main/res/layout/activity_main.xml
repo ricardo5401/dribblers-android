@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +8,7 @@
     tools:context="pe.edu.upc.dribblers.activities.MainActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/mainToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -15,21 +16,30 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <FrameLayout
-        android:id="@+id/contentContainer"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottomBar"
-        android:layout_below="@+id/toolbar"/>
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
 
-    <com.roughike.bottombar.BottomBar
-        android:id="@+id/bottomBar"
+        <FrameLayout
+            android:id="@+id/mainContainerFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/bottomBar" />
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.BottomNavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/mainBottomVavigationView"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
-        app:bb_inActiveTabColor="@color/bb_darkBackgroundColor"
-        app:bb_activeTabColor="@color/colorIcons"
-        app:bb_tabXmlResource="@xml/bottombar_tabs" />
+        app:itemIconTint="@color/colorIcons"
+        app:itemTextColor="@color/colorIcons"
+        app:menu="@menu/menu_bottom" />
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
