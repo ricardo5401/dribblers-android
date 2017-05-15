@@ -7,4 +7,6 @@
     <string name="menu_home">Home</string>
     <string name="menu_training">Training</string>
     <string name="menu_notifications">Notifications</string>
+    <string name="card_date">01</string>
+    <string name="card_day">MON</string>
 </resources>

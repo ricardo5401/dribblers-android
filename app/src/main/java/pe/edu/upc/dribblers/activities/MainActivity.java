@@ -94,5 +94,4 @@ public class MainActivity extends BaseActivity {
         return user;
     }
 
-
 }
