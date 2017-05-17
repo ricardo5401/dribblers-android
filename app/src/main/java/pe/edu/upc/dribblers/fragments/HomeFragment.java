@@ -1,5 +1,7 @@
 package pe.edu.upc.dribblers.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.view.ViewGroup;
 import pe.edu.upc.dribblers.DribblersApp;
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.adapters.HomeAdapter;
+import pe.edu.upc.dribblers.adapters.TrainingActivitiesAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,11 +40,12 @@ public class HomeFragment extends Fragment {
         mHomeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
+
+
     private void updateData() {
         ((HomeAdapter)
             mHomeRecyclerView.getAdapter())
                 .setTrainingActivitiesDays(DribblersApp.getInstance().getTrainingActivities());
-        mHomeRecyclerView.getAdapter().notifyDataSetChanged();
     }
 
 }

@@ -1,5 +1,6 @@
 package pe.edu.upc.dribblers.adapters;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +13,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import pe.edu.upc.dribblers.DribblersApp;
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.TrainingActivity;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by herrmartell on 5/16/17.
@@ -22,8 +26,7 @@ import pe.edu.upc.dribblers.backend.models.TrainingActivity;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     private List<TrainingActivity> mTrainingActivities;
-    private int mDate;
-    private String mDay;
+    private TrainingActivitiesAdapter mTrainingActivitiesAdapter;
 
     @Override
     public HomeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,6 +40,12 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(HomeAdapter.ViewHolder holder, int position) {
         holder.planDateTextView.setText(getTrainingActivityDate(position));
         holder.planMonthTextView.setText(getTrainingActivityMonth(position));
+        mTrainingActivitiesAdapter = new TrainingActivitiesAdapter();
+        mTrainingActivitiesAdapter.setTrainingActivitiesItems(
+                DribblersApp.getInstance().getTrainingActivities());
+        holder.cardItemsRecyclerView.setAdapter(mTrainingActivitiesAdapter);
+        holder.cardItemsRecyclerView.setLayoutManager(
+                new LinearLayoutManager(holder.itemView.getContext()));
     }
 
     @Override
@@ -54,11 +63,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         TextView planDateTextView;
         TextView planMonthTextView;
+        RecyclerView cardItemsRecyclerView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             planDateTextView = (TextView) itemView.findViewById(R.id.planDateTextView);
             planMonthTextView = (TextView) itemView.findViewById(R.id.planMonthTextView);
+            cardItemsRecyclerView = (RecyclerView) itemView.findViewById(R.id.cardItemsRecyclerView);
         }
     }
 
