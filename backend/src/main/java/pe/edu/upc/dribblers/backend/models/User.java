@@ -22,8 +22,7 @@ public class User extends SugarRecord implements Serializable {
     String token;
     String email;
 
-    public User() {
-    }
+    public User() {}
 
     public static User build(JSONObject mJSONObject) {
         User user = null;

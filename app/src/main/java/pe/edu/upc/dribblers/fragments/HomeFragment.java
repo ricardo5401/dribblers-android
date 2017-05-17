@@ -1,33 +1,47 @@
 package pe.edu.upc.dribblers.fragments;
 
-
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import pe.edu.upc.dribblers.DribblersApp;
 import pe.edu.upc.dribblers.R;
+import pe.edu.upc.dribblers.adapters.HomeAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
 
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    RecyclerView mHomeRecyclerView;
+    HomeAdapter mHomeAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        initializeComponents();
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    private void initializeComponents() {
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mHomeRecyclerView = (RecyclerView) view.findViewById(R.id.homeRecyclerView);
+        mHomeAdapter = new HomeAdapter();
+        mHomeAdapter.setTrainingActivitiesDays(DribblersApp.getInstance().getTrainingActivities());
+        mHomeRecyclerView.setAdapter(mHomeAdapter);
+        mHomeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    private void updateData() {
+        ((HomeAdapter)
+            mHomeRecyclerView.getAdapter())
+                .setTrainingActivitiesDays(DribblersApp.getInstance().getTrainingActivities());
+        mHomeRecyclerView.getAdapter().notifyDataSetChanged();
     }
 
 }

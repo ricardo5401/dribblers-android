@@ -15,7 +15,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/dateTextView"
+                android:id="@+id/planDateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -26,7 +26,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/dayTextView"
+                android:id="@+id/planMonthTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
