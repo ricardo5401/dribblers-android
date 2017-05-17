@@ -7,40 +7,42 @@
     android:layout_height="match_parent"
     tools:context="pe.edu.upc.dribblers.activities.MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/mainToolbar"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/mainToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?android:actionBarSize"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
 
         <FrameLayout
             android:id="@+id/mainContainerFrameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottomBar" />
+            android:layout_above="@+id/mainBottomVavigationView"
+            android:layout_below="@id/mainToolbar" />
 
-    </android.support.v4.widget.NestedScrollView>
 
-    <android.support.design.widget.BottomNavigationView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/mainBottomVavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
-        app:itemIconTint="@color/colorIcons"
-        app:itemTextColor="@color/colorIcons"
-        app:menu="@menu/menu_bottom" />
+
+        <android.support.design.widget.BottomNavigationView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/mainBottomVavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            app:itemIconTint="@color/bottom_navigation_text_color"
+            app:itemTextColor="@color/bottom_navigation_text_color"
+            app:menu="@menu/menu_bottom" />
+
+    </RelativeLayout>
+
 
 </android.support.design.widget.CoordinatorLayout>
