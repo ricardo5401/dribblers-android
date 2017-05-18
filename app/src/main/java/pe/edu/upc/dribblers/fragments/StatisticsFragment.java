@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -35,7 +38,10 @@ public class StatisticsFragment extends Fragment {
     BarChart mBarChart;
     private float[] yData = {70, 30};
     private String[] xData = {"Acertados", "Fallidos"};
-
+    ArrayList<BarEntry> BARENTRY ;
+    ArrayList<String> BarEntryLabels ;
+    BarDataSet Bardataset ;
+    BarData BARDATA ;
 
     public StatisticsFragment() {
 
@@ -51,12 +57,50 @@ public class StatisticsFragment extends Fragment {
 
         mPieChart = (PieChart) v.findViewById(R.id.pieChart);
         mBarChart = (BarChart) v.findViewById(R.id.barChart);
+        BARENTRY = new ArrayList<>();
+
+        BarEntryLabels = new ArrayList<String>();
+
+        AddValuesToBARENTRY();
+
+        AddValuesToBarEntryLabels();
+
+        Bardataset = new BarDataSet(BARENTRY, "Projects");
+
+        BARDATA = new BarData(Bardataset);
+
+        Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        mBarChart.setData(BARDATA);
+
+        mBarChart.animateY(3000);
+
         configurePie();
 
 
         return v;
     }
+    public void AddValuesToBARENTRY(){
 
+        BARENTRY.add(new BarEntry(2f, 0));
+        BARENTRY.add(new BarEntry(4f, 1));
+        BARENTRY.add(new BarEntry(6f, 2));
+        BARENTRY.add(new BarEntry(8f, 3));
+        BARENTRY.add(new BarEntry(7f, 4));
+        BARENTRY.add(new BarEntry(3f, 5));
+
+    }
+
+    public void AddValuesToBarEntryLabels(){
+
+        BarEntryLabels.add("January");
+        BarEntryLabels.add("February");
+        BarEntryLabels.add("March");
+        BarEntryLabels.add("April");
+        BarEntryLabels.add("May");
+        BarEntryLabels.add("June");
+
+    }
     private void configurePie() {
         mPieChart.setRotationEnabled(true);
 

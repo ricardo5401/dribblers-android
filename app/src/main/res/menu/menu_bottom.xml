@@ -9,10 +9,9 @@
         android:id="@+id/action_training"
         android:icon="@drawable/ic_exercise"
         android:title="@string/menu_training" />
-
     <item
         android:id="@+id/action_notification"
         android:icon="@drawable/ic_notification"
-        android:title="@string/menu_notifications" />
+        android:title="@string/menu_notifications"/>
 
 </menu>
