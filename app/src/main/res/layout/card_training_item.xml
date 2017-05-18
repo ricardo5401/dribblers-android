@@ -18,7 +18,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:padding="8dp"
-            android:src="@mipmap/ic_basketball"/>
+            android:src="@drawable/icon_basketball"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
