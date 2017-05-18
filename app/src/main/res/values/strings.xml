@@ -5,10 +5,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_home">Home</string>
-    <string name="menu_training">Training</string>
-    <string name="menu_notifications">Notifications</string>
+    <string name="menu_training">Entrenamiento</string>
+    <string name="menu_notifications">Notificaciones</string>
     <string name="card_date">01</string>
     <string name="card_day">MON</string>
     <string name="training_name">Training name example</string>
     <string name="training_schedule">10:00 AM</string>
+    <string name="home_training">INICIO RÁPIDO</string>
+    <string name="home_events">EVENTOS</string>
+    <string name="type_title">LIBRE</string>
+    <string name="free_training">Libre</string>
+    <string name="basic_training">Básico</string>
+    <string name="advanced_training">Avanzado</string>
 </resources>

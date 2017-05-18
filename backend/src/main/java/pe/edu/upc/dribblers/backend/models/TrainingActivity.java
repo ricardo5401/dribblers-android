@@ -13,6 +13,10 @@ public class TrainingActivity {
     private Date mExpectedTime;
     private Date mTimestamp;
     private TrainingPlan mTrainingPlan;
+    private int mAsserts;
+    private int mFails;
+    private String mTitle;
+    private String mCreatedAt;
 
     public TrainingActivity() {}
 
@@ -81,4 +85,39 @@ public class TrainingActivity {
         return mTrainingPlan.getId();
     }
 
+    public int getAsserts() {
+        return mAsserts;
+    }
+
+    public TrainingActivity setAsserts(int mAsserts) {
+        this.mAsserts = mAsserts;
+        return this;
+    }
+
+    public int getFails() {
+        return mFails;
+    }
+
+    public TrainingActivity setFails(int mFails) {
+        this.mFails = mFails;
+        return this;
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public TrainingActivity setTitle(String mTitle) {
+        this.mTitle = mTitle;
+        return this;
+    }
+
+    public String getCreatedAt() {
+        return mCreatedAt;
+    }
+
+    public TrainingActivity setCreatedAt(String mCreatedAt) {
+        this.mCreatedAt = mCreatedAt;
+        return this;
+    }
 }

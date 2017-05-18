@@ -19,6 +19,11 @@ public class NotificationsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static NotificationsFragment newInstance(){
+        NotificationsFragment fragment = new NotificationsFragment();
+        return fragment;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

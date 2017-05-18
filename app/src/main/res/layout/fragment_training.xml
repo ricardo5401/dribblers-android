@@ -4,20 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pe.edu.upc.dribblers.fragments.TrainingFragment"
-    android:background="#000000">
+    tools:context="pe.edu.upc.dribblers.fragments.TrainingFragment">
 
 
-    <ImageView
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/trainingRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/image_training_background"
-        android:scaleType="fitCenter"/>
+        tools:listitem="@layout/card_training_item"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Training" />
 
 </RelativeLayout>

@@ -1,51 +1,113 @@
 package pe.edu.upc.dribblers.fragments;
 
-import android.app.Activity;
-import android.content.Context;
+
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import pe.edu.upc.dribblers.DribblersApp;
+import com.astuetz.PagerSlidingTabStrip;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pe.edu.upc.dribblers.R;
-import pe.edu.upc.dribblers.adapters.HomeAdapter;
-import pe.edu.upc.dribblers.adapters.TrainingActivitiesAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
 
-    RecyclerView mHomeRecyclerView;
-    HomeAdapter mHomeAdapter;
+    @BindView(R.id.mth_home)
+    PagerSlidingTabStrip mthHome;
+    @BindView(R.id.vp_home)
+    ViewPager vpHome;
+
+    View homeView;
+    HomeTrainingFragment homeTrainingFragment;
+    HomeEventsFragment homeEventsFragment;
+    HomeViewPagerAdapter homeViewPagerAdapter;
+
+    public static HomeFragment newInstance(){
+        HomeFragment fragment = new HomeFragment();
+        return fragment;
+    }
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        // Inflate the layout for this fragment
+        homeView =  inflater.inflate(R.layout.fragment_home, container, false);
+        ButterKnife.bind(this, homeView);
+        AssignViewPager();
+        return homeView;
+    }
+    private void AssignViewPager() {
+        homeViewPagerAdapter = new HomeViewPagerAdapter(getChildFragmentManager());
+        vpHome.setAdapter(homeViewPagerAdapter);
+        vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mthHome.setViewPager(vpHome);
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mHomeRecyclerView = (RecyclerView) view.findViewById(R.id.homeRecyclerView);
-        mHomeAdapter = new HomeAdapter();
-        mHomeAdapter.setTrainingActivitiesDays(DribblersApp.getInstance().getTrainingActivities());
-        mHomeRecyclerView.setAdapter(mHomeAdapter);
-        mHomeRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+    private class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
+
+        public HomeViewPagerAdapter(FragmentManager fragmentManager) {
+            super(fragmentManager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            if (position == 0) {
+                if(homeTrainingFragment == null){
+                    homeTrainingFragment = HomeTrainingFragment.newInstance();
+                }
+                return homeTrainingFragment;
+            } else {
+                if(homeEventsFragment == null){
+                    homeEventsFragment = HomeEventsFragment.newInstance();
+                }
+                return homeEventsFragment;
+            }
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            if (position == 0) {
+                return getString(R.string.home_training);
+            } else {
+                return getString(R.string.home_events);
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
     }
 
-
-
-    private void updateData() {
-        ((HomeAdapter)
-            mHomeRecyclerView.getAdapter())
-                .setTrainingActivitiesDays(DribblersApp.getInstance().getTrainingActivities());
-    }
 
 }

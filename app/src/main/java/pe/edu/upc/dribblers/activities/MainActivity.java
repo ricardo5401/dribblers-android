@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.User;
+import pe.edu.upc.dribblers.fragments.HomeEventsFragment;
 import pe.edu.upc.dribblers.fragments.HomeFragment;
 import pe.edu.upc.dribblers.fragments.NotificationsFragment;
 import pe.edu.upc.dribblers.fragments.TrainingFragment;
@@ -38,7 +39,7 @@ public class MainActivity extends BaseActivity {
         user = (User) getIntent().getSerializableExtra("user");
 
         fragmentManager = getSupportFragmentManager();
-        fragment = new HomeFragment();
+        fragment = HomeFragment.newInstance();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.mainContainerFrameLayout, fragment).commit();
 
@@ -50,16 +51,16 @@ public class MainActivity extends BaseActivity {
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.action_home:
-                                fragment = new HomeFragment();
+                                fragment = HomeFragment.newInstance();
                                 title = "Home";
                                 break;
                             case R.id.action_training:
-                                fragment = new TrainingFragment();
-                                title = "Training";
+                                fragment = TrainingFragment.newInstance();
+                                title = "Entrenamientos";
                                 break;
                             case R.id.action_notification:
-                                fragment = new NotificationsFragment();
-                                title = "Notifications";
+                                fragment = NotificationsFragment.newInstance();
+                                title = "Notificaciones";
                                 break;
                         }
                         final FragmentTransaction transaction = fragmentManager.beginTransaction();
