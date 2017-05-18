@@ -36,6 +36,7 @@ public class StatisticsFragment extends Fragment {
     private float[] yData = {70, 30};
     private String[] xData = {"Acertados", "Fallidos"};
 
+
     public StatisticsFragment() {
 
     }
@@ -49,6 +50,7 @@ public class StatisticsFragment extends Fragment {
 
 
         mPieChart = (PieChart) v.findViewById(R.id.pieChart);
+        mBarChart = (BarChart) v.findViewById(R.id.barChart);
         configurePie();
 
 
