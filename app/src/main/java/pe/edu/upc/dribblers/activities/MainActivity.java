@@ -16,6 +16,7 @@ import pe.edu.upc.dribblers.backend.models.User;
 import pe.edu.upc.dribblers.fragments.HomeEventsFragment;
 import pe.edu.upc.dribblers.fragments.HomeFragment;
 import pe.edu.upc.dribblers.fragments.NotificationsFragment;
+import pe.edu.upc.dribblers.fragments.StatisticsFragment;
 import pe.edu.upc.dribblers.fragments.TrainingFragment;
 
 public class MainActivity extends BaseActivity {
@@ -61,6 +62,10 @@ public class MainActivity extends BaseActivity {
                             case R.id.action_notification:
                                 fragment = NotificationsFragment.newInstance();
                                 title = "Notificaciones";
+                                break;
+                            case R.id.action_chart:
+                                fragment = StatisticsFragment.newInstance();
+                                title = "Estadisticas";
                                 break;
                         }
                         final FragmentTransaction transaction = fragmentManager.beginTransaction();

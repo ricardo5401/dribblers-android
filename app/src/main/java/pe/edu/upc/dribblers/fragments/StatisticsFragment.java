@@ -46,6 +46,10 @@ public class StatisticsFragment extends Fragment {
     public StatisticsFragment() {
 
     }
+    public static StatisticsFragment newInstance(){
+        StatisticsFragment fragment = new StatisticsFragment();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
