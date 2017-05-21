@@ -19,4 +19,13 @@
     <string name="free_training">Libre</string>
     <string name="basic_training">Básico</string>
     <string name="advanced_training">Avanzado</string>
+    <string name="chronometer_title_session_text">CONTEO</string>
+    <string name="countdown_text">3</string>
+    <string name="chronometer_score_succes">0</string>
+    <string name="chronometer_score_fail">0</string>
+    <string name="chronometer_dialog_alert_title">Entrenamiento</string>
+    <string name="chronometer_dialog_alert_context">¿Desea detener del entrenamieto?</string>
+    <string name="chronometer_dialog_alert_confirmation">DETENER</string>
+    <string name="chronometer_dialog_alert_denegate">CANCELAR</string>
+    <string name="chronemter_stop">DETENER</string>
 </resources>

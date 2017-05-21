@@ -1,6 +1,7 @@
 package pe.edu.upc.dribblers.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +12,9 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pe.edu.upc.dribblers.R;
+import pe.edu.upc.dribblers.activities.SessionTrainingActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -79,4 +82,9 @@ public class HomeTrainingFragment extends Fragment {
         advancedTrainingTextView.setTextColor(getResources().getColor(R.color.colorGray));
     }
 
+    @OnClick(R.id.buttonStartRelativeLayout)
+    public void submit(View view) {
+        Intent intent = new Intent(getActivity(), SessionTrainingActivity.class);
+        getActivity().startActivity(intent);
+    }
 }
