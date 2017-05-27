@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -24,16 +28,20 @@ import org.json.JSONObject;
 
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.User;
+import pe.edu.upc.dribblers.backend.network.Constants;
 import pe.edu.upc.dribblers.backend.network.Facebook;
 import pe.edu.upc.dribblers.backend.network.Google;
+import pl.droidsonroids.gif.GifImageView;
 
 public class LoginActivity extends BaseActivity {
 
     private static final int RC_SIGN_IN = 20;
-    CallbackManager callbackManager;
+    CallbackManager mCallbackManager;
     GoogleApiClient mGoogleApiClient;
-    LoginButton facebookBTN;
-    SignInButton googleBTN;
+    LoginButton mFacebookBTN;
+    SignInButton mGoogleBTN;
+    GifImageView mLoadingGiftIV;
+    TextView mLoadingTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +52,20 @@ public class LoginActivity extends BaseActivity {
 
     private void initializeComponents() {
         removerSavedEmail();
-        callbackManager = CallbackManager.Factory.create();
+        mCallbackManager = CallbackManager.Factory.create();
+        mLoadingTextView = (TextView) findViewById(R.id.loadingGiftText);
+        mLoadingGiftIV = (GifImageView) findViewById(R.id.loadingGift);
         initializeGoogleAuth();
         initializeFacebookAuth();
     }
 
     private void initializeGoogleAuth() {
-        googleBTN = (SignInButton) findViewById(R.id.googleBTN);
-        TextView textView = (TextView) googleBTN.getChildAt(0);
+        mGoogleBTN = (SignInButton) findViewById(R.id.googleBTN);
+        TextView textView = (TextView) mGoogleBTN.getChildAt(0);
         textView.setText("Continuar con Google");
         textView.setTextAlignment(ViewFlipper.TEXT_ALIGNMENT_TEXT_START);
         mGoogleApiClient = Google.getClient(this);
-        googleBTN.setOnClickListener(new View.OnClickListener() {
+        mGoogleBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -66,9 +76,9 @@ public class LoginActivity extends BaseActivity {
 
     private void initializeFacebookAuth() {
         FacebookSdk.sdkInitialize(getApplicationContext());
-        facebookBTN = (LoginButton) findViewById(R.id.facebookBTN);
-        facebookBTN.setReadPermissions(Facebook.ReadPermission());
-        facebookBTN.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        mFacebookBTN = (LoginButton) findViewById(R.id.facebookBTN);
+        mFacebookBTN.setReadPermissions(Facebook.ReadPermission());
+        mFacebookBTN.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
@@ -106,6 +116,25 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
+    private void showLogin(){
+        mLoadingGiftIV.setVisibility(View.INVISIBLE);
+        mLoadingTextView.setVisibility(View.INVISIBLE);
+        mGoogleBTN.setVisibility(View.VISIBLE);
+        mFacebookBTN.setVisibility(View.VISIBLE);
+    }
+
+    private void showLoading(){
+        mLoadingGiftIV.setVisibility(View.VISIBLE);
+        mLoadingTextView.setVisibility(View.VISIBLE);
+        mGoogleBTN.setVisibility(View.INVISIBLE);
+        mFacebookBTN.setVisibility(View.INVISIBLE);
+    }
+
+
+    private void setLoadingText(String text){
+        mLoadingTextView.setText(text);
+    }
+
     @Override
     public void onBackPressed() {
         //empty prevent back to main activity
@@ -119,7 +148,7 @@ public class LoginActivity extends BaseActivity {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(Google.SignInResult(result));
         } else { //facebook callback
-            callbackManager.onActivityResult(requestCode, resultCode, data);
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
 
@@ -129,5 +158,43 @@ public class LoginActivity extends BaseActivity {
         } else {
             showMessage("Unknown error, please try again");
         }
+    }
+    private void signIn(final User user, final boolean redirect) {
+        //new sign in via social network
+        setLoadingText("Iniciando ...");
+        showLoading();
+        Log.i(SIGNIN_TAG, "URL: " + Constants.Server.AUTHORIZE_URL);
+        AndroidNetworking.post(Constants.Server.AUTHORIZE_URL)
+                .addBodyParameter("email", user.getEmail())
+                .addBodyParameter("first_name", user.getFirstName())
+                .addBodyParameter("last_name", user.getLastName())
+                .setTag(SIGNIN_TAG)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        User authenticatedUser = User.build(extractUser(response));
+                        if (authenticatedUser != null && !authenticatedUser.getEmail().isEmpty()) {
+                            Log.i(SIGNIN_TAG, "Sign in successfully");
+                            logUser(authenticatedUser);
+                            saveUser(authenticatedUser);
+                            if (redirect) {
+                                goToMain(authenticatedUser);
+                            }
+                        } else {
+                            showLogin();
+                            Log.e(SIGNIN_TAG, "Error on signin");
+                            showError("Server error, try again");
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError error) {
+                        showLogin();
+                        manageNetworkError(error, SIGNIN_TAG);
+                        showError("Server error, try again");
+                    }
+                });
     }
 }
