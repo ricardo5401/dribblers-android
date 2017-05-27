@@ -8,6 +8,9 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
-    <color name="ColorBlack">#000000</color>
-    <color name="ColorLightGray">#EDEDED</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteTransparent">#50FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#ADADAD</color>
+    <color name="colorOrange">#FF530D</color>
 </resources>

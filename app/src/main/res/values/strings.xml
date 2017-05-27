@@ -5,4 +5,28 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in">Sign In ...</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_training">Entrenamiento</string>
+    <string name="menu_notifications">Notificaciones</string>
+    <string name="menu_statistics">Estadisticas</string>
+    <string name="menu_friends">Amigos</string>
+    <string name="card_date">01</string>
+    <string name="card_day">MON</string>
+    <string name="training_name">Training name example</string>
+    <string name="training_schedule">10:00 AM</string>
+    <string name="home_training">INICIO RÁPIDO</string>
+    <string name="home_events">EVENTOS</string>
+    <string name="type_title">LIBRE</string>
+    <string name="free_training">Libre</string>
+    <string name="basic_training">Básico</string>
+    <string name="advanced_training">Avanzado</string>
+    <string name="chronometer_title_session_text">CONTEO</string>
+    <string name="countdown_text">3</string>
+    <string name="chronometer_score_succes">0</string>
+    <string name="chronometer_score_fail">0</string>
+    <string name="chronometer_dialog_alert_title">Entrenamiento</string>
+    <string name="chronometer_dialog_alert_context">¿Desea detener del entrenamieto?</string>
+    <string name="chronometer_dialog_alert_confirmation">DETENER</string>
+    <string name="chronometer_dialog_alert_denegate">CANCELAR</string>
+    <string name="chronemter_stop">DETENER</string>
 </resources>

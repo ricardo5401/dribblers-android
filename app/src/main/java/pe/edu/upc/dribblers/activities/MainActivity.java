@@ -1,35 +1,30 @@
 package pe.edu.upc.dribblers.activities;
 
-import android.content.Intent;
-import android.support.annotation.IdRes;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.TextView;
-
-import com.facebook.FacebookSdk;
-import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnTabSelectListener;
 
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.User;
+import pe.edu.upc.dribblers.fragments.HomeEventsFragment;
 import pe.edu.upc.dribblers.fragments.HomeFragment;
-import pe.edu.upc.dribblers.fragments.NotificationFragment;
+import pe.edu.upc.dribblers.fragments.NotificationsFragment;
+import pe.edu.upc.dribblers.fragments.StatisticsFragment;
 import pe.edu.upc.dribblers.fragments.TrainingFragment;
 
 public class MainActivity extends BaseActivity {
 
     User user;
-    BottomBar bottomBar;
     Fragment fragment;
     FragmentManager fragmentManager;
+    String title = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,36 +32,48 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initializeComponents();
     }
-    private void initializeComponents(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+    private void initializeComponents() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Dribblers");
-        user = (User)getIntent().getSerializableExtra("user");
+        user = (User) getIntent().getSerializableExtra("user");
 
         fragmentManager = getSupportFragmentManager();
-        fragment = new HomeFragment();
+        fragment = HomeFragment.newInstance();
         final FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(R.id.contentContainer, fragment).commit();
+        transaction.add(R.id.mainContainerFrameLayout, fragment).commit();
 
-        bottomBar = (BottomBar) findViewById(R.id.bottomBar);
-        bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                switch (tabId) {
-                    case R.id.homeMenu:
-                        fragment = new HomeFragment();
-                        break;
-                    case R.id.trainingMenu:
-                        fragment = new TrainingFragment();
-                        break;
-                    case R.id.notificationMenu:
-                        fragment = new NotificationFragment();
-                        break;
-                }
-                final FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.contentContainer, fragment).commit();
-            }
-        });
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.mainBottomVavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.action_home:
+                                fragment = HomeFragment.newInstance();
+                                title = "Home";
+                                break;
+                            case R.id.action_training:
+                                fragment = TrainingFragment.newInstance();
+                                title = "Entrenamientos";
+                                break;
+                            case R.id.action_notification:
+                                fragment = NotificationsFragment.newInstance();
+                                title = "Notificaciones";
+                                break;
+                            case R.id.action_chart:
+                                fragment = StatisticsFragment.newInstance();
+                                title = "Estadisticas";
+                                break;
+                        }
+                        final FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        transaction.replace(R.id.mainContainerFrameLayout, fragment).commit();
+                        getSupportActionBar().setTitle(title);
+                        return true;
+                    }
+                });
     }
 
     @Override
@@ -89,7 +96,8 @@ public class MainActivity extends BaseActivity {
         return false;
     }
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
+
 }

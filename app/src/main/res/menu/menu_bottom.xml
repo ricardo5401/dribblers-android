@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home"
+        android:enabled="true"
+        android:title="@string/menu_home" />
+    <item
+        android:id="@+id/action_training"
+        android:icon="@drawable/ic_exercise"
+        android:title="@string/menu_training"
+        android:enabled="true"/>
+
+    <item
+        android:id="@+id/action_notification"
+        android:icon="@drawable/ic_notification"
+        android:title="@string/menu_notifications"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/action_chart"
+        android:icon="@drawable/ic_chart"
+        android:title="@string/menu_statistics"
+        android:enabled="true"/>
+    <item
+        android:id="@+id/action_friend"
+        android:icon="@drawable/ic_group"
+        android:title="@string/menu_friends"
+        android:enabled="true"/>
+
+</menu>

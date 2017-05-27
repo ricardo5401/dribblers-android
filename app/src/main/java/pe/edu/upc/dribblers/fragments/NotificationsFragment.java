@@ -12,11 +12,16 @@ import pe.edu.upc.dribblers.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NotificationFragment extends Fragment {
+public class NotificationsFragment extends Fragment {
 
 
-    public NotificationFragment() {
+    public NotificationsFragment() {
         // Required empty public constructor
+    }
+
+    public static NotificationsFragment newInstance(){
+        NotificationsFragment fragment = new NotificationsFragment();
+        return fragment;
     }
 
 

@@ -15,13 +15,35 @@ import java.util.List;
  */
 
 public class User extends SugarRecord implements Serializable {
+
     int foreId;
     String firstName;
     String lastName;
     String token;
     String email;
 
-    public User(){ }
+    public User() {}
+
+    public static User build(JSONObject mJSONObject) {
+        User user = null;
+        try {
+            user = new User()
+                    .setEmail(mJSONObject.getString("email"))
+                    .setFirstName(mJSONObject.getString("first_name"))
+                    .setLastName(mJSONObject.getString("last_name"))
+                    .setForeId(mJSONObject.getInt("id"))
+                    .setToken(mJSONObject.getString("token"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("BUILD_USER", e.getMessage());
+        }
+        return user;
+    }
+
+    public static User findByEmail(String email) {
+        List<User> users = User.find(User.class, "email = ?", email);
+        return (users.size() > 0) ? users.get(0) : null;
+    }
 
     public int getForeId() {
         return foreId;
@@ -66,26 +88,5 @@ public class User extends SugarRecord implements Serializable {
     public User setEmail(String mEmail) {
         this.email = mEmail;
         return this;
-    }
-
-    public static User build(JSONObject mJSONObject){
-        User user = null;
-        try {
-            user = new User()
-                    .setEmail(mJSONObject.getString("email"))
-                    .setFirstName(mJSONObject.getString("first_name"))
-                    .setLastName(mJSONObject.getString("last_name"))
-                    .setForeId(mJSONObject.getInt("id"))
-                    .setToken(mJSONObject.getString("token"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.e("BUILD_USER", e.getMessage());
-        }
-        return user;
-    }
-
-    public static User findByEmail(String email){
-        List<User> users = User.find(User.class, "email = ?", email);
-        return (users.size() > 0) ? users.get(0) : null;
     }
 }
