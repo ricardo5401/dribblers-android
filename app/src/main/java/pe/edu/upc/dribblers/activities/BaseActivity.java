@@ -12,17 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.facebook.login.LoginManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import pe.edu.upc.dribblers.backend.models.User;
-import pe.edu.upc.dribblers.backend.network.Constants;
 
 /**
  * Created by ricardo on 5/12/17.

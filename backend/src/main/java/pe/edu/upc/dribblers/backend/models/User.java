@@ -21,6 +21,7 @@ public class User extends SugarRecord implements Serializable {
     String lastName;
     String token;
     String email;
+    private String picture;
 
     public User() {}
 
@@ -88,5 +89,13 @@ public class User extends SugarRecord implements Serializable {
     public User setEmail(String mEmail) {
         this.email = mEmail;
         return this;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

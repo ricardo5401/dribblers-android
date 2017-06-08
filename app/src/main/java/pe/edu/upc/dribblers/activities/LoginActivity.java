@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.User;
-import pe.edu.upc.dribblers.backend.network.Constants;
+import pe.edu.upc.dribblers.backend.network.DribblersAPI;
 import pe.edu.upc.dribblers.backend.network.Facebook;
 import pe.edu.upc.dribblers.backend.network.Google;
 import pl.droidsonroids.gif.GifImageView;
@@ -163,8 +163,8 @@ public class LoginActivity extends BaseActivity {
         //new sign in via social network
         setLoadingText("Iniciando ...");
         showLoading();
-        Log.i(SIGNIN_TAG, "URL: " + Constants.Server.AUTHORIZE_URL);
-        AndroidNetworking.post(Constants.Server.AUTHORIZE_URL)
+        Log.i(SIGNIN_TAG, "URL: " + DribblersAPI.AUTHORIZE_URL);
+        AndroidNetworking.post(DribblersAPI.AUTHORIZE_URL)
                 .addBodyParameter("email", user.getEmail())
                 .addBodyParameter("first_name", user.getFirstName())
                 .addBodyParameter("last_name", user.getLastName())
