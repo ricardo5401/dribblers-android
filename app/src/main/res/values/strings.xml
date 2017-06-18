@@ -29,4 +29,6 @@
     <string name="chronometer_dialog_alert_confirmation">DETENER</string>
     <string name="chronometer_dialog_alert_denegate">CANCELAR</string>
     <string name="chronemter_stop">DETENER</string>
+    <string name="plan_title_example">Plan title example</string>
+    <string name="training_plan_description_example">Training plan description example</string>
 </resources>
