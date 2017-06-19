@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/trainingPlanCardView"
     android:layout_marginTop="5dp">
 
     <LinearLayout
@@ -19,6 +20,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
+                android:id="@+id/planAnImageView"
                 android:src="@drawable/training_placeholder" />
 
         </LinearLayout>
@@ -36,7 +38,7 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/planDescriptionTextView"
+                android:id="@+id/planShootTypeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/training_plan_description_example"
