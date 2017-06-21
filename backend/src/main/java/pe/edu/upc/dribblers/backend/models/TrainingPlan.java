@@ -15,35 +15,16 @@ import java.util.List;
 
 public class TrainingPlan {
 
-    private int mIdUser;
-    private String mPlanName;
     private String mName;
-    private String mShootType;
+    private String mDescription;
     private String mPictureUrl;
 
     public TrainingPlan() {}
 
-    public TrainingPlan(int mId, String mPlanName) {
-        this.mIdUser = mId;
-        this.mPlanName = mPlanName;
-    }
-
-    public int getId() {
-        return mIdUser;
-    }
-
-    public TrainingPlan setId(int mId) {
-        this.mIdUser = mId;
-        return this;
-    }
-
-    public String getPlanName() {
-        return mPlanName;
-    }
-
-    public TrainingPlan setPlanName(String mPlanName) {
-        this.mPlanName = mPlanName;
-        return this;
+    public TrainingPlan(String mName, String mDescription, String mPictureUrl) {
+        this.mName = mName;
+        this.mDescription = mDescription;
+        this.mPictureUrl = mPictureUrl;
     }
 
     public String getName() {
@@ -55,12 +36,12 @@ public class TrainingPlan {
         return this;
     }
 
-    public String getShootType() {
-        return mShootType;
+    public String getDescription() {
+        return mDescription;
     }
 
-    public TrainingPlan setShootType(String mShootType) {
-        this.mShootType = mShootType;
+    public TrainingPlan setDescription(String mShootType) {
+        this.mDescription = mShootType;
         return this;
     }
 
@@ -77,7 +58,7 @@ public class TrainingPlan {
         try {
             return new TrainingPlan()
                     .setName(jsonObject.getString("name"))
-                    .setShootType(jsonObject.getString("shoot_type"))
+                    .setDescription(jsonObject.getString("description"))
                     .setPictureUrl(jsonObject.getString("picture_url"));
         } catch (JSONException e) {
             e.printStackTrace();
