@@ -2,10 +2,13 @@ package pe.edu.upc.dribblers.backend.models;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import pe.edu.upc.dribblers.backend.utils.Formatter;
 
@@ -117,5 +120,19 @@ public class TrainingActivity {
             Log.e("BUILD_TRAINING_ACTIVITY", "Error on building: "+ e.getMessage());
             return null;
         }
+    }
+    public static List<TrainingActivity> build(JSONArray jsonArray){
+        List<TrainingActivity> mActivities = new ArrayList<>();
+        if(jsonArray == null) return mActivities;
+
+        int length = jsonArray.length();
+        for (int i = 0; i < length; i++){
+            try {
+                mActivities.add(TrainingActivity.build(jsonArray.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return mActivities;
     }
 }
