@@ -30,10 +30,6 @@ public class TrainingActivitiesAdapter extends
 
     @Override
     public void onBindViewHolder(TrainingActivitiesAdapter.ViewHolder holder, int position) {
-        holder.trainingNameTextView
-                .setText(mTrainingActivities.get(position).getTrainingPlan().getPlanName());
-        holder.scheduleTextView
-                .setText(mTrainingActivities.get(position).getTimestamp().toString());
     }
 
     @Override

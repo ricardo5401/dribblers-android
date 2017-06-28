@@ -71,10 +71,6 @@ public class TrainingFragment extends Fragment {
         TrainingActivity trainingActivity;
         for(int i = 0 ; i < 10; i++){
             trainingActivity = new TrainingActivity();
-            trainingActivity.setTitle("Entrenamiento " + (i+1))
-                    .setCreatedAt("18/05/2017")
-                    .setAsserts((i+1)*5)
-                    .setFails((i+1)*3);
             mActivities.add(trainingActivity);
         }
         mTrainingAdapter.notifyDataSetChanged();

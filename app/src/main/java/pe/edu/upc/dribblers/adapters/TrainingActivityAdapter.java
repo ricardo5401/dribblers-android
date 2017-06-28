@@ -1,66 +1,56 @@
 package pe.edu.upc.dribblers.adapters;
-
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.androidnetworking.widget.ANImageView;
-
 import java.util.List;
-
-import pe.edu.upc.dribblers.DribblersApp;
 import pe.edu.upc.dribblers.R;
-import pe.edu.upc.dribblers.activities.TrainingPlanActivity;
 import pe.edu.upc.dribblers.backend.models.TrainingActivity;
-import pe.edu.upc.dribblers.backend.models.TrainingPlan;
 
 /**
- * Created by RICHI on 19/06/2017.
+ * Created by alumnos on 6/22/17.
  */
 
-public class TrainingPlanAdapter extends RecyclerView.Adapter<TrainingPlanAdapter.ViewHolder> {
+public class TrainingActivityAdapter extends RecyclerView.Adapter<TrainingActivityAdapter.ViewHolder> {
 
-    private List<TrainingPlan> mTrainingPlans;
+    private List<TrainingActivity> mTrainingActivities;
 
     @Override
-    public TrainingPlanAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TrainingActivityAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater
                 .from(parent.getContext())
                 .inflate(R.layout.card_training_plan, parent, false);
-        ViewHolder mViewHolder = new ViewHolder(mView);
+        TrainingActivityAdapter.ViewHolder mViewHolder = new TrainingActivityAdapter.ViewHolder(mView);
         return mViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(TrainingPlanAdapter.ViewHolder holder, final int position) {
-        holder.mNameTextView.setText(mTrainingPlans.get(position).getName());
-        holder.mShootTypeTextView.setText(mTrainingPlans.get(position).getDescription());
+    public void onBindViewHolder(TrainingActivityAdapter.ViewHolder holder, final int position) {
+        holder.mNameTextView.setText(mTrainingActivities.get(position).getName());
+        holder.mShootTypeTextView.setText(mTrainingActivities.get(position).getDescription());
         holder.mPlanAnImageView.setDefaultImageResId(R.drawable.training_placeholder);
-        holder.mPlanAnImageView.setImageUrl(mTrainingPlans.get(position).getPictureUrl());
+        holder.mPlanAnImageView.setImageUrl(mTrainingActivities.get(position).getPictureUrl());
         holder.mTrainingPlanCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DribblersApp.getInstance().setCurrentPlan(mTrainingPlans.get(position));
-                v.getContext().startActivity(new Intent(v.getContext(), TrainingPlanActivity.class));
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mTrainingPlans.size();
+        return mTrainingActivities.size();
     }
 
-    public List<TrainingPlan> getTrainingPlans() {
-        return mTrainingPlans;
+    public List<TrainingActivity> getTrainingActivities() {
+        return mTrainingActivities;
     }
 
-    public void setTrainingPlans(List<TrainingPlan> mTrainingPlans) {
-        this.mTrainingPlans = mTrainingPlans;
+    public void setTrainingActivities(List<TrainingActivity> mTrainingActivities) {
+        this.mTrainingActivities = mTrainingActivities;
     }
 
 

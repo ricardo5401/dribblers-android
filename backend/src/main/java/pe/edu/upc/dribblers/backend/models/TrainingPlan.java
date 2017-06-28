@@ -18,6 +18,7 @@ public class TrainingPlan {
     private String mName;
     private String mDescription;
     private String mPictureUrl;
+    private Integer mId;
 
     public TrainingPlan() {}
 
@@ -54,10 +55,20 @@ public class TrainingPlan {
         return this;
     }
 
+    public Integer getForeId() {
+        return mId;
+    }
+
+    public TrainingPlan setForeId(Integer mId) {
+        this.mId = mId;
+        return this;
+    }
+
     public static TrainingPlan build(JSONObject jsonObject){
         try {
             return new TrainingPlan()
                     .setName(jsonObject.getString("name"))
+                    .setForeId(jsonObject.getInt("id"))
                     .setDescription(jsonObject.getString("description"))
                     .setPictureUrl(jsonObject.getString("picture_url"));
         } catch (JSONException e) {

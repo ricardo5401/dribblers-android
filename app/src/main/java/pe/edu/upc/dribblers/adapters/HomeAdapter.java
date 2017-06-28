@@ -74,13 +74,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     private String getTrainingActivityDate(int position) {
-        Date date = mTrainingActivities.get(position).getTimestamp();
+        Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd", Locale.US);
         return dateFormat.format(date);
     }
 
     private String getTrainingActivityMonth(int position) {
-        Date date = mTrainingActivities.get(position).getTimestamp();
+        Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("MMM", Locale.US);
         return dateFormat.format(date);
     }

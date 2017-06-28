@@ -42,10 +42,6 @@ public class TrainingAdapter extends RecyclerView.Adapter<TrainingAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final TrainingActivity trainingActivity = trainingActivityList.get(position);
-        holder.dateTextView.setText(trainingActivity.getCreatedAt());
-        holder.titleTextView.setText(trainingActivity.getTitle());
-        holder.assertsTextView.setText("Aciertos: " + trainingActivity.getAsserts());
-        holder.failsTextView.setText("Fallos: " + trainingActivity.getFails());
         holder.itemTrainingCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

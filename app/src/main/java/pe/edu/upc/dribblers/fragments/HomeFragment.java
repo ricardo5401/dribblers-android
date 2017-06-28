@@ -29,6 +29,7 @@ public class HomeFragment extends Fragment {
     View homeView;
     HomeTrainingFragment homeTrainingFragment;
     HomeEventsFragment homeEventsFragment;
+    HomePlansFragment mHomePlansFragment;
     HomeViewPagerAdapter homeViewPagerAdapter;
 
     public static HomeFragment newInstance(){
@@ -87,10 +88,10 @@ public class HomeFragment extends Fragment {
                 }
                 return homeTrainingFragment;
             } else {
-                if(homeEventsFragment == null){
-                    homeEventsFragment = HomeEventsFragment.newInstance();
+                if(mHomePlansFragment == null){
+                    mHomePlansFragment = HomePlansFragment.newInstance();
                 }
-                return homeEventsFragment;
+                return mHomePlansFragment;
             }
         }
 
@@ -99,7 +100,7 @@ public class HomeFragment extends Fragment {
             if (position == 0) {
                 return getString(R.string.home_training);
             } else {
-                return getString(R.string.home_events);
+                return "TRAINING PLANS";
             }
         }
 

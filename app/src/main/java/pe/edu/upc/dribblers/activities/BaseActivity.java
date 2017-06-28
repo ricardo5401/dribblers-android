@@ -18,6 +18,7 @@ import com.facebook.login.LoginManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import pe.edu.upc.dribblers.DribblersApp;
 import pe.edu.upc.dribblers.backend.models.User;
 
 /**
@@ -66,6 +67,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void goToMain(User user) {
         Intent intent = new Intent(this, MainActivity.class);
+        DribblersApp.getInstance().setCurrentUser(user);
         intent.putExtra("user", user);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);

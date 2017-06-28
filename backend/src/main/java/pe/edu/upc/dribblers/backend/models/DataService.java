@@ -11,20 +11,10 @@ import java.util.List;
 public class DataService {
 
     private List<TrainingActivity> mTrainingActivities;
+    private User mUser;
+    private TrainingPlan mTrainingPlan;
 
     public DataService() {
-        mTrainingActivities = new ArrayList<>();
-        mTrainingActivities.add(new TrainingActivity(
-                getTrainingPlans().get(0), 40, true, new Date(), new Date()));
-        mTrainingActivities.add(new TrainingActivity(
-                getTrainingPlans().get(1), 25, false, new Date(), new Date()));
-    }
-
-    public List<TrainingPlan> getTrainingPlans() {
-        List<TrainingPlan> trainingPlans = new ArrayList<>();
-        trainingPlans.add(new TrainingPlan(0, "Práctica de ejemplo"));
-        trainingPlans.add(new TrainingPlan(1, "Torneo galáctico"));
-        return trainingPlans;
     }
 
     public List<TrainingActivity> getTrainingActivities() { return mTrainingActivities; }
@@ -33,6 +23,18 @@ public class DataService {
         mTrainingActivities.add(trainingActivity);
         return true;
     }
+
+    public User getCurrentUser(){
+        return mUser;
+    }
+
+    public void setCurrentUser(User user){
+        this.mUser = user;
+    }
+
+    public TrainingPlan getCurrentPlan(){ return mTrainingPlan; }
+
+    public void setCurrentPlan(TrainingPlan trainingPlan){ this.mTrainingPlan = trainingPlan; }
 
     public int getActivitiesCount() { return getTrainingActivities().size(); }
 
