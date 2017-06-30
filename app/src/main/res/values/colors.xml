@@ -12,5 +12,7 @@
     <color name="colorWhiteTransparent">#50FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#ADADAD</color>
-    <color name="colorOrange">#FF530D</color>
+    <color name="colorOrange">#FF5722</color>
+    <color name="colorOrangeDark">#E64A19</color>
+    <color name="colorOrangeLight">#FFCCBC</color>
 </resources>

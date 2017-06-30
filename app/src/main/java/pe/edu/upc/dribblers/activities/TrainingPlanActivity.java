@@ -1,16 +1,19 @@
 package pe.edu.upc.dribblers.activities;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.androidnetworking.widget.ANImageView;
 
 import org.json.JSONArray;
 
@@ -32,6 +35,7 @@ public class TrainingPlanActivity extends AppCompatActivity {
     private static String TAG = "TRAINING_PLAN_ACTIVITY";
     private RecyclerView mTrainingActivityRecyclerView;
     private TrainingActivityAdapter mTrainingActivityAdapter;
+    private ANImageView mTrainingPlanBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,8 @@ public class TrainingPlanActivity extends AppCompatActivity {
         mTrainingActivities = new ArrayList<>();
         mTrainingActivityRecyclerView = (RecyclerView) findViewById(R.id.trainingActivityRecyclerView);
         mTrainingActivityAdapter = new TrainingActivityAdapter();
+        mTrainingPlanBackground = (ANImageView) findViewById(R.id.trainingPlanBackground);
+        mTrainingPlanBackground.setImageUrl(mTrainingPlan.getPictureUrl());
         mTrainingActivityAdapter.setTrainingActivities(mTrainingActivities);
         mTrainingActivityRecyclerView.setAdapter(mTrainingActivityAdapter);
         mTrainingActivityRecyclerView.setLayoutManager(new LinearLayoutManager(this));

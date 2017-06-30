@@ -7,9 +7,10 @@
     <string name="sign_in">Sign In ...</string>
     <string name="menu_home">Home</string>
     <string name="menu_training">Entrenamiento</string>
-    <string name="menu_notifications">Notificaciones</string>
+    <string name="menu_notifications">Eventos</string>
     <string name="menu_statistics">Estadisticas</string>
     <string name="menu_friends">Amigos</string>
+    <string name="menu_profile">Perfil</string>
     <string name="card_date">01</string>
     <string name="card_day">MON</string>
     <string name="training_name">Training name example</string>
