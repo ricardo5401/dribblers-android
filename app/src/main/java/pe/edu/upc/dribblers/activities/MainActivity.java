@@ -13,13 +13,10 @@ import android.view.MenuItem;
 
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.User;
-import pe.edu.upc.dribblers.fragments.HomeEventsFragment;
 import pe.edu.upc.dribblers.fragments.HomeFragment;
-import pe.edu.upc.dribblers.fragments.HomePlansFragment;
-import pe.edu.upc.dribblers.fragments.HomeTrainingFragment;
+import pe.edu.upc.dribblers.fragments.TrainingPlansFragment;
 import pe.edu.upc.dribblers.fragments.NotificationsFragment;
 import pe.edu.upc.dribblers.fragments.StatisticsFragment;
-import pe.edu.upc.dribblers.fragments.TrainingFragment;
 
 public class MainActivity extends BaseActivity {
 
@@ -58,7 +55,7 @@ public class MainActivity extends BaseActivity {
                                 title = "Home";
                                 break;
                             case R.id.action_training:
-                                fragment = HomePlansFragment.newInstance();
+                                fragment = TrainingPlansFragment.newInstance();
                                 title = "Entrenamientos";
                                 break;
                             case R.id.action_notification:

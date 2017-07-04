@@ -1,36 +1,33 @@
 package pe.edu.upc.dribblers.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.astuetz.PagerSlidingTabStrip;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pe.edu.upc.dribblers.R;
+import pe.edu.upc.dribblers.activities.SessionTrainingActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
 
-    @BindView(R.id.mth_home)
-    PagerSlidingTabStrip mthHome;
-    @BindView(R.id.vp_home)
-    ViewPager vpHome;
+    @BindView(R.id.freeTrainingTextView) TextView freeTrainingTextView;
+    @BindView(R.id.basicTrainingTextView) TextView basicTrainingTextView;
+    @BindView(R.id.advancedTrainingTextView) TextView advancedTrainingTextView;
+    @BindView(R.id.titleTypeTextView) TextView titleTypeTextView;
+    @BindView(R.id.buttonStartRelativeLayout) RelativeLayout buttonStartRelativeLayout;
 
-    View homeView;
-    HomeTrainingFragment homeTrainingFragment;
-    HomeEventsFragment homeEventsFragment;
-    HomePlansFragment mHomePlansFragment;
-    HomeViewPagerAdapter homeViewPagerAdapter;
+    View homeTrainingView;
 
     public static HomeFragment newInstance(){
         HomeFragment fragment = new HomeFragment();
@@ -46,68 +43,48 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        homeView =  inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.bind(this, homeView);
-        AssignViewPager();
-        return homeView;
+        homeTrainingView =  inflater.inflate(R.layout.fragment_home, container, false);
+        ButterKnife.bind(this, homeTrainingView);
+        changeTrainingEvent();
+        return homeTrainingView;
     }
-    private void AssignViewPager() {
-        homeViewPagerAdapter = new HomeViewPagerAdapter(getChildFragmentManager());
-        vpHome.setAdapter(homeViewPagerAdapter);
-        vpHome.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+    private void changeTrainingEvent(){
+        freeTrainingTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void onClick(View v) {
+                cleanOptions();
+                freeTrainingTextView.setTextColor(getResources().getColor(R.color.colorBlack));
+                titleTypeTextView.setText(getString(R.string.free_training));
             }
         });
-        mthHome.setViewPager(vpHome);
+        basicTrainingTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cleanOptions();
+                basicTrainingTextView.setTextColor(getResources().getColor(R.color.colorBlack));
+                titleTypeTextView.setText(getString(R.string.basic_training));
+            }
+        });
+        advancedTrainingTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cleanOptions();
+                advancedTrainingTextView.setTextColor(getResources().getColor(R.color.colorBlack));
+                titleTypeTextView.setText(getString(R.string.advanced_training));
+            }
+        });
     }
 
-
-    private class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
-
-        public HomeViewPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            if (position == 0) {
-                if(homeTrainingFragment == null){
-                    homeTrainingFragment = HomeTrainingFragment.newInstance();
-                }
-                return homeTrainingFragment;
-            } else {
-                if(mHomePlansFragment == null){
-                    mHomePlansFragment = HomePlansFragment.newInstance();
-                }
-                return mHomePlansFragment;
-            }
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            if (position == 0) {
-                return getString(R.string.home_training);
-            } else {
-                return "TRAINING PLANS";
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
+    private void cleanOptions(){
+        freeTrainingTextView.setTextColor(getResources().getColor(R.color.colorGray));
+        basicTrainingTextView.setTextColor(getResources().getColor(R.color.colorGray));
+        advancedTrainingTextView.setTextColor(getResources().getColor(R.color.colorGray));
     }
 
+    @OnClick(R.id.buttonStartRelativeLayout)
+    public void submit(View view) {
+        Intent intent = new Intent(getActivity(), SessionTrainingActivity.class);
+        getActivity().startActivity(intent);
+    }
 }
