@@ -32,8 +32,8 @@ public class TrainingPlan {
         return mName;
     }
 
-    public TrainingPlan setName(String mNanme) {
-        this.mName = mNanme;
+    public TrainingPlan setName(String mName) {
+        this.mName = mName;
         return this;
     }
 
