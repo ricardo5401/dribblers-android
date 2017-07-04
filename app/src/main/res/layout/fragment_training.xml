@@ -6,13 +6,11 @@
     android:layout_height="match_parent"
     tools:context="pe.edu.upc.dribblers.fragments.TrainingFragment">
 
-
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/trainingRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/card_training_item"/>
-
+        tools:listitem="@layout/card_training_item"
+        android:background="@color/colorPrimaryDark"/>
 
 </RelativeLayout>

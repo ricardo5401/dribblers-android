@@ -5,7 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +31,7 @@ import pe.edu.upc.dribblers.backend.models.TrainingPlan;
 import pe.edu.upc.dribblers.backend.models.User;
 import pe.edu.upc.dribblers.backend.network.DribblersAPI;
 
-public class TrainingPlanActivity extends AppCompatActivity {
+public class TrainingPlanActivity extends BaseActivity {
 
     TrainingPlan mTrainingPlan;
     List<TrainingActivity> mTrainingActivities;
@@ -80,4 +84,5 @@ public class TrainingPlanActivity extends AppCompatActivity {
                     }
                 });
     }
+
 }
