@@ -30,6 +30,7 @@ import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.activities.AddEventActivity;
 import pe.edu.upc.dribblers.adapters.EventAdapter;
 import pe.edu.upc.dribblers.adapters.TrainingPlanAdapter;
+import pe.edu.upc.dribblers.backend.models.Activity;
 import pe.edu.upc.dribblers.backend.models.Event;
 import pe.edu.upc.dribblers.backend.models.TrainingPlan;
 import pe.edu.upc.dribblers.backend.models.User;
@@ -42,6 +43,7 @@ public class EventsFragment extends Fragment {
     private RecyclerView mEventsRecyclerView;
     private EventAdapter mEventAdapter;
     private FloatingActionButton mAddEvent;
+    private static int _requestCode = 300;
 
     public EventsFragment() {
         // Required empty public constructor
@@ -77,10 +79,18 @@ public class EventsFragment extends Fragment {
         mAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), AddEventActivity.class));
+                startActivityForResult(new Intent(v.getContext(), AddEventActivity.class), _requestCode);
             }
         });
         updateEvents();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == _requestCode && resultCode == android.app.Activity.RESULT_OK) {
+            updateEvents();
+        }
     }
 
     private void updateEvents(){

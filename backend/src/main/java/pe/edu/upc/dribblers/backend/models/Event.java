@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,10 +17,10 @@ import pe.edu.upc.dribblers.backend.utils.Formatter;
  * Created by RICHI on 3/07/2017.
  */
 
-public class Event {
+public class Event implements Serializable {
     private int mId;
     private int mUserId;
-    private String mName;
+    private String mDescription;
     private Date mEventDate;
     private String mPlace;
     private boolean isPublic;
@@ -42,18 +43,20 @@ public class Event {
         return this;
     }
 
-    public String getName() {
-        return mName;
+    public String getDescription() {
+        return mDescription;
     }
 
-    public Event setName(String description) {
-        this.mName = description;
+    public Event setDescription(String description) {
+        this.mDescription = description;
         return this;
     }
 
     public Date getEventDate() {
         return mEventDate;
     }
+
+    public String getStringDate() { return Formatter.parseDate(this.mEventDate); }
 
     public Event setEventDate(Date eventDate) {
         this.mEventDate = eventDate;
@@ -81,7 +84,7 @@ public class Event {
 
         try {
             return new Event()
-                    .setName(jsonObject.getString("name"))
+                    .setDescription(jsonObject.getString("description"))
                     .setPlace(jsonObject.getString("place"))
                     .setForeId(jsonObject.getInt("id"))
                     .setUserId(jsonObject.getInt("user_id"))
@@ -107,5 +110,22 @@ public class Event {
             }
         }
         return mEvents;
+    }
+
+    public JSONObject serialize(){
+        JSONObject jsonEvent = new JSONObject();
+        try {
+            JSONObject jsonObject = new JSONObject()
+            .put("user_id", this.mUserId)
+            .put("is_public", this.isPublic)
+            .put("description", this.mDescription)
+            .put("place", this.mPlace)
+            .put("event_date", this.mEventDate);
+
+            return jsonEvent.put("event", jsonObject);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

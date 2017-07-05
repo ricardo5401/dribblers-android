@@ -36,8 +36,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(EventAdapter.ViewHolder holder, final int position) {
-        holder.mNameTextView.setText(mEvents.get(position).getName());
-        holder.mShootTypeTextView.setText(mEvents.get(position).getEventDate().toString());
+        holder.mNameTextView.setText(mEvents.get(position).getDescription());
+        holder.mShootTypeTextView.setText(mEvents.get(position).getStringDate());
         holder.mPlanAnImageView.setDefaultImageResId(R.drawable.training_placeholder);
         holder.mTrainingPlanCardView.setOnClickListener(new View.OnClickListener() {
             @Override

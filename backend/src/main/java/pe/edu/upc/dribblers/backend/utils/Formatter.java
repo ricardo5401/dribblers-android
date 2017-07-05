@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class Formatter {
     public static Date parseDate(String date){
-        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss");
         Date mDate = new Date();
         try {
             mDate = mFormat.parse(date);
@@ -18,5 +18,10 @@ public class Formatter {
             e.printStackTrace();
         }
         return mDate;
+    }
+    public static String parseDate(Date date){
+        SimpleDateFormat format = new
+                SimpleDateFormat("MMMM dd yyyy hh:mm aa", java.util.Locale.forLanguageTag("EN"));
+        return format.format(date);
     }
 }

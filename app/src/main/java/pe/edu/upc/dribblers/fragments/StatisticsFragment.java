@@ -110,7 +110,7 @@ public class StatisticsFragment extends Fragment {
 
         // configure pie chart
         mPieChart.setUsePercentValues(true);
-        // mChart.setName("Smartphones Market Share");
+        // mChart.setDescription("Smartphones Market Share");
 
         // enable hole and configure
         mPieChart.setDrawHoleEnabled(true);
