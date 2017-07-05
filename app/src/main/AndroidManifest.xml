@@ -29,12 +29,12 @@
         <activity
             android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activities.MainActivity"/>
+        <activity android:name=".activities.MainActivity" />
         <activity
             android:name=".activities.SessionTrainingActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.TrainingPlanActivity"></activity>
+        <activity android:name=".activities.TrainingPlanActivity" />
+        <activity android:name=".activities.AddEventActivity"></activity>
     </application>
 
 </manifest>

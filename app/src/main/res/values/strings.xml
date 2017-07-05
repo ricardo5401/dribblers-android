@@ -32,4 +32,7 @@
     <string name="chronemter_stop">DETENER</string>
     <string name="plan_title_example">Plan title example</string>
     <string name="training_plan_description_example">Training plan description example</string>
+    <string name="event_name">EVENT NAME</string>
+    <string name="event_place">PLACE</string>
+    <string name="event_date">EVENT DATE</string>
 </resources>

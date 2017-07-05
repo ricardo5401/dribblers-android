@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import pe.edu.upc.dribblers.R;
 import pe.edu.upc.dribblers.backend.models.User;
+import pe.edu.upc.dribblers.fragments.EventsFragment;
 import pe.edu.upc.dribblers.fragments.HomeFragment;
 import pe.edu.upc.dribblers.fragments.TrainingPlansFragment;
 import pe.edu.upc.dribblers.fragments.NotificationsFragment;
@@ -59,8 +60,8 @@ public class MainActivity extends BaseActivity {
                                 title = "Entrenamientos";
                                 break;
                             case R.id.action_notification:
-                                fragment = NotificationsFragment.newInstance();
-                                title = "Notificaciones";
+                                fragment = EventsFragment.newInstance();
+                                title = "Eventos";
                                 break;
                             case R.id.action_chart:
                                 fragment = StatisticsFragment.newInstance();

@@ -6,10 +6,11 @@ import com.orm.SugarApp;
 import java.util.ArrayList;
 import java.util.List;
 
-import pe.edu.upc.dribblers.backend.models.DataService;
+import pe.edu.upc.dribblers.backend.models.Event;
 import pe.edu.upc.dribblers.backend.models.TrainingActivity;
 import pe.edu.upc.dribblers.backend.models.TrainingPlan;
 import pe.edu.upc.dribblers.backend.models.User;
+import pe.edu.upc.dribblers.backend.network.DribblersAPI;
 
 /**
  * Created by ricardo on 5/12/17.
@@ -18,7 +19,7 @@ import pe.edu.upc.dribblers.backend.models.User;
 public class DribblersApp extends SugarApp {
 
     private static DribblersApp mDribblersApp;
-    private DataService dataService = new DataService();
+    private DribblersAPI mDribblersAPI = new DribblersAPI();
 
     public DribblersApp() {
         super();
@@ -36,20 +37,24 @@ public class DribblersApp extends SugarApp {
     }
 
     public List<TrainingActivity> getTrainingActivities() {
-        return dataService.getTrainingActivities();
+        return mDribblersAPI.getTrainingActivities();
     }
 
     public boolean addTrainingActivity(TrainingActivity trainingActivity) {
-        return dataService.addTrainingActivity(trainingActivity);
+        return mDribblersAPI.addTrainingActivity(trainingActivity);
     }
 
-    public void setCurrentUser(User user){ dataService.setCurrentUser(user); }
+    public void setCurrentUser(User user){ mDribblersAPI.setCurrentUser(user); }
 
-    public User getCurrentUser(){ return dataService.getCurrentUser(); }
+    public User getCurrentUser(){ return mDribblersAPI.getCurrentUser(); }
 
-    public void setCurrentPlan(TrainingPlan trainingPlan){ dataService.setCurrentPlan(trainingPlan); }
+    public void setCurrentPlan(TrainingPlan trainingPlan){ mDribblersAPI.setCurrentPlan(trainingPlan); }
 
-    public TrainingPlan getCurrentPlan(){ return dataService.getCurrentPlan(); }
+    public void setCurrentEvent(Event mEvent){ mDribblersAPI.setCurrentEvent(mEvent); }
+
+    public Event getCurrentEvent() { return mDribblersAPI.getCurrentEvent(); }
+
+    public TrainingPlan getCurrentPlan(){ return mDribblersAPI.getCurrentPlan(); }
 
     public List<TrainingPlan> getTrainingPlans() {
         return new ArrayList<TrainingPlan>();

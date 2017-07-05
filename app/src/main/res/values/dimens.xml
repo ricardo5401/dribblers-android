@@ -4,4 +4,6 @@
     <dimen name="default_margin">10dp</dimen>
     <dimen name="chronometer_count_text_size">100sp</dimen>
     <dimen name="chronometer_score_text_size">20sp</dimen>
+    <dimen name="margin_top_text_view">20dp</dimen>
+    <dimen name="text_view_margin_left">5dp</dimen>
 </resources>

@@ -19,8 +19,9 @@ import pe.edu.upc.dribblers.backend.utils.Formatter;
 public class Event {
     private int mId;
     private int mUserId;
-    private String mDescription;
+    private String mName;
     private Date mEventDate;
+    private String mPlace;
     private boolean isPublic;
 
     public int getForeId() {
@@ -41,12 +42,12 @@ public class Event {
         return this;
     }
 
-    public String getDescription() {
-        return mDescription;
+    public String getName() {
+        return mName;
     }
 
-    public Event setDescription(String description) {
-        this.mDescription = description;
+    public Event setName(String description) {
+        this.mName = description;
         return this;
     }
 
@@ -68,12 +69,20 @@ public class Event {
         return this;
     }
 
+    public String getmPlace(){ return this.mPlace; }
+
+    public Event setPlace(String mPlace){
+        this.mPlace = mPlace;
+        return  this;
+    }
+
     public static Event build(JSONObject jsonObject){
         if(jsonObject == null) return null;
 
         try {
             return new Event()
-                    .setDescription(jsonObject.getString("description"))
+                    .setName(jsonObject.getString("name"))
+                    .setPlace(jsonObject.getString("place"))
                     .setForeId(jsonObject.getInt("id"))
                     .setUserId(jsonObject.getInt("user_id"))
                     .setPublic(jsonObject.getBoolean("is_public"))

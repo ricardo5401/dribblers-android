@@ -5,9 +5,18 @@
     tools:context="pe.edu.upc.dribblers.fragments.EventsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/eventsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/colorPrimaryDark" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/default_margin"
+        android:src="@drawable/ic_add_black_24dp"/>
 
 </FrameLayout>
