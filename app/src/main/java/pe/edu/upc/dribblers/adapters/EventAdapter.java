@@ -14,6 +14,7 @@ import java.util.List;
 
 import pe.edu.upc.dribblers.DribblersApp;
 import pe.edu.upc.dribblers.R;
+import pe.edu.upc.dribblers.activities.EventActivity;
 import pe.edu.upc.dribblers.activities.TrainingPlanActivity;
 import pe.edu.upc.dribblers.backend.models.Event;
 
@@ -43,7 +44,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 DribblersApp.getInstance().setCurrentEvent(mEvents.get(position));
-                v.getContext().startActivity(new Intent(v.getContext(), TrainingPlanActivity.class));
+                v.getContext().startActivity(new Intent(v.getContext(), EventActivity.class));
             }
         });
     }
